@@ -7,14 +7,6 @@ class Sudoku {
     this.#render_sudoku();
     if (resolve_button) {
       resolve_button.addEventListener('click', () => {
-        for (let i = 0; i < this.size * 3; i++) {
-          for (let j = 0; j < this.size * 3; j++) {
-            if (this.board[i][j] != 0 && !this.is_valid(i, j, this.board[i][j])) {
-              return alert(`Sudoku Invalido`);
-            }
-          }
-        }
-
         this.solve(0, 0);
         this.#render_sudoku();
       });
@@ -43,11 +35,7 @@ class Sudoku {
   }
 
   is_valid(row, col, num) {
-    let aux = num;
-    this.board[row][col] = 0;
-    let valid = this.#is_valid_row(row, num) && this.#is_valid_column(col, num) && this.#is_valid_subgrid(row, col, num);
-    this.board[row][col] = aux;
-    return valid;
+    return this.#is_valid_row(row, num) && this.#is_valid_column(col, num) && this.#is_valid_subgrid(row, col, num);
   }
 
   solve(row = 0, col = 0) {
