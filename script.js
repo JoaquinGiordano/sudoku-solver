@@ -45,7 +45,9 @@ class Sudoku {
   is_valid(row, col, num) {
     let aux = num;
     this.board[row][col] = 0;
-    return this.#is_valid_row(row, num) && this.#is_valid_column(col, num) && this.#is_valid_subgrid(row, col, num);
+    let valid = this.#is_valid_row(row, num) && this.#is_valid_column(col, num) && this.#is_valid_subgrid(row, col, num);
+    this.board[row][col] = aux;
+    return valid;
   }
 
   solve(row = 0, col = 0) {
